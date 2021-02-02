@@ -80,7 +80,7 @@ def download_generic(url, output_name):
         if r.encoding is None:
             with open(output_name, 'wb') as f:
                 f.write(r.content)
-            else:
+        else:
             download_manual(url, output_name)
     else:
         print('Using local file')
