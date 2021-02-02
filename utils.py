@@ -15,6 +15,14 @@ import requests
 import pickle
 import sys
 import re
+from urllib.parse import urlparse
+
+def valid_url(x):
+    try:
+        result = urlparse(x)
+        return all([result.scheme, result.netloc, result.path])
+    except:
+        return False
 
 def prettify_name(name):
     valid = "-_%s%s" % (string.ascii_letters, string.digits)
@@ -62,17 +70,20 @@ def download_google_drive(url, output_name):
         f.write(r.content)
 
 def download_generic(url, output_name):
-    print('Downloading', url)
-    session = requests.Session()
-    r = session.get(url, allow_redirects=True)
-    r.raise_for_status()
+    if valid_url(url):
+        print('Downloading', url)
+        session = requests.Session()
+        r = session.get(url, allow_redirects=True)
+        r.raise_for_status()
 
-    # No encoding means raw data
-    if r.encoding is None:
-        with open(output_name, 'wb') as f:
-            f.write(r.content)
+        # No encoding means raw data
+        if r.encoding is None:
+            with open(output_name, 'wb') as f:
+                f.write(r.content)
+            else:
+            download_manual(url, output_name)
     else:
-        download_manual(url, output_name)
+        print('Using local file')
 
 def download_manual(url, output_name):
     outpath = Path(output_name).resolve()
