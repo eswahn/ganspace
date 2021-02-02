@@ -110,6 +110,9 @@ class StyleGAN2(BaseModel):
             'cat': 256,
             'church': 256,
             'horse': 256,
+            'network1024': 1024,
+            'network512': 512,
+            'network256': 256,
             # Tuomas
             'bedrooms': 256,
             'kitchen': 256,
@@ -137,6 +140,9 @@ class StyleGAN2(BaseModel):
     # URLs created with https://sites.google.com/site/gdocs2direct/
     def download_checkpoint(self, outfile):
         checkpoints = {
+            'network1024': 'network1024.pkl',
+            'network512': 'network512.pkl',
+            'network256': 'network256.pkl',
             'horse': 'https://drive.google.com/uc?export=download&id=18SkqWAkgt0fIwDEf2pqeaenNi4OoCo-0',
             'ffhq': 'https://drive.google.com/uc?export=download&id=1FJRwzAkV-XWbxgTwxEmEACvuqF5DsBiV',
             'church': 'https://drive.google.com/uc?export=download&id=1HFM694112b_im01JT7wop0faftw9ty5g',
